@@ -1,0 +1,30 @@
+#!/bin/sh
+
+ref=$1
+varscanjar=$2
+samplelist=$3
+outputfile=$4
+
+# bams=$*
+
+# echo $ref
+# echo $bams
+# echo $outputfile
+# echo $varscanjar
+
+shift
+shift
+shift
+shift
+
+# echo "samtools mpileup -f $ref $* | java -jar $varscanjar mpileup2snp --p-value 99e-02 --strand-filter 1 --output-vcf 1 > $outputfile"
+#samtools mpileup -f $ref $* | java -jar $varscanjar mpileup2snp --p-value 99e-02 --strand-filter 1 --output-vcf 1 --vcf-sample-list $samplelist  > $outputfile
+
+samtools mpileup -f $ref $* | ~/Programs/Java/jre1.7.0_45/bin/java -jar $varscanjar mpileup2snp --p-value 0.10 --strand-filter 1 --output-vcf 1 --vcf-sample-list $samplelist  > $outputfile
+
+#echo "samtools mpileup -f $ref $* | java -jar $varscanjar mpileup2snp --p-value 0.10 --strand-filter 1 --output-vcf 1 --vcf-sample-list $samplelist  > $outputfile"
+
+# samtools mpileup -f $ref $* | java -jar $varscanjar mpileup2snp --p-value 99e-02 --strand-filter 1 --output-vcf 1 --vcf-sample-list $samplelist  > $outputfile
+
+# samtools mpileup -f $ref $bams | java -jar $varscanjar mpileup2snp --p-value 99e-02 --strand-filter 1 --output-vcf 1 > $outputfile
+

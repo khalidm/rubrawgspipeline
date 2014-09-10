@@ -1,0 +1,10 @@
+#!/bin/sh
+
+mem=$1
+snpeffpath=$2
+
+shift
+shift
+
+java -Xmx${mem}g -Djava.io.tmpdir=$TMPDIR -jar $snpeffpath/snpEff.jar $*
+

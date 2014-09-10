@@ -1,0 +1,8 @@
+#!/bin/sh
+
+mem=$1
+shift
+
+#java -Xmx${mem}g -Djava.io.tmpdir=$TMPDIR -jar $PICARD_HOME/lib/MarkDuplicates.jar TMP_DIR=$TMPDIR $*
+
+java -Xmx${mem}g -Djava.io.tmpdir=$TMPDIR -jar /vlsci/VR0002/kmahmood/Programs/Picard/picard-tools-1.107/MarkDuplicates.jar TMP_DIR=$TMPDIR $*

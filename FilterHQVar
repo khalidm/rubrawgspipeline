@@ -1,0 +1,22 @@
+#!/bin/sh
+
+mem=$1
+snpeffpath=$2
+vcf=$3
+output=$4
+shift
+
+cat ${vcf} | \
+    java -Xmx${mem}g -Djava.io.tmpdir=$TMPDIR -jar $snpeffpath/SnpSift.jar \
+    filter "( na FILTER ) | (FILTER = 'PASS' | FILTER =~ 'VQSRT')" > $output
+
+
+#    | bgzip -c > $output && \
+#    tabix -p vcf $output
+
+#cat ${result}/recalibrated_variants.vcf | \
+#    java -Xmx${mem}g -jar $snpeffpath/SnpSift.jar \
+#    filter "( na FILTER ) | (FILTER = 'PASS' | FILTER =~ 'VQSRT')" \
+#    | bgzip -c > ${result}/hq_recalibrated_variants.vcf.gz && \
+#    tabix -p vcf ${result}/hq_recalibrated_variants.vcf.gz
+
